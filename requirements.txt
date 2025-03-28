@@ -1,0 +1,7 @@
+numpy
+pandas
+flask
+gym
+scipy
+tensorflow
+stable-baselines3
