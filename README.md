@@ -1,4 +1,103 @@
 # Digital-Blanket-Batch-2-Project
+
+# Energy Optimization Model
+
+This repository contains an energy optimization model using reinforcement learning to regulate air conditioning based on room temperature, outside temperature, and energy usage.
+
+## Prerequisites
+Make sure you have the following installed:
+- Python 3.8+
+- pip
+- Virtual Environment (optional but recommended)
+- Required Python packages
+
+## Installation
+
+1. **Clone the Repository**
+   ```sh
+   git clone <repository-url>
+   cd digital-blacket
+   ```
+
+2. **Create a Virtual Environment (Optional but Recommended)**
+   ```sh
+   python -m venv venv
+   source venv/bin/activate  # On macOS/Linux
+   venv\Scripts\activate  # On Windows
+   ```
+
+3. **Install Dependencies**
+   ```sh
+   pip install -r requirements.txt
+   ```
+
+## Running the Model
+
+### 1️⃣ Train the Model
+Run the training script to train the reinforcement learning model:
+```sh
+python model/train_model.py
+```
+Once training is complete, the model will be saved as:
+```sh
+model/energy_optimizer.zip
+```
+
+### 2️⃣ Test the Model
+After training, test the model with:
+```sh
+python model/test_model.py
+```
+This will output a series of test actions and rewards based on sample inputs.
+
+### 3️⃣ Start the API Server
+Run the Flask API to serve the model:
+```sh
+python app.py
+```
+This will start the API on `http://127.0.0.1:5000`.
+
+### 4️⃣ Send Requests to the API
+Use `Invoke-RestMethod` (PowerShell) or `curl` to send data to the model and get predictions:
+
+#### PowerShell:
+```powershell
+Invoke-RestMethod -Uri "http://127.0.0.1:5000/optimize" -Method Post -Headers @{"Content-Type"="application/json"} -Body '{"room_temp": 24, "outside_temp": 30, "energy": 40}'
+```
+
+#### Curl (Linux/Mac/Windows WSL):
+```sh
+curl -X POST "http://127.0.0.1:5000/optimize" -H "Content-Type: application/json" -d '{"room_temp": 24, "outside_temp": 30, "energy": 40}'
+```
+
+## Expected API Response
+```json
+{
+  "action": 0
+}
+```
+The response contains an **action**:
+- `0`: Increase AC power (cooling)
+- `1`: Decrease AC power (heating)
+- `2`: Maintain current settings
+
+## Adjusting Model Parameters
+- Modify `energy_env.py` for custom reward functions and state transitions.
+- Tune hyperparameters in `train_model.py` to improve performance.
+
+## Troubleshooting
+- Ensure Flask is running before sending requests.
+- Check dependencies with `pip freeze`.
+- Review logs for training performance.
+
+## License
+This project is open-source. Modify and use it as needed!
+
+## Author
+- **Your Name**
+- Contact: your-email@example.com
+
+
 This repo is for the Batch 2 interns of Digital Blanket to create an Agentic AI microservices project
 8. README (README.md)
 md
